@@ -410,10 +410,9 @@ exports.refreshToken = async (req, res) => {
 
 		// options for cookie
 		const options = {
-			expires: new Date(Date.now() + process.env.JWT_TOKEN_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+			maxAge: process.env.JWT_TOKEN_COOKIE_MAX_AGE_MILLISECONDS,
 			httpOnly: true,
 		}
-
 		res.status(200).cookie('AccessToken', accessToken, options).json(
 			successResponse(0, 'SUCCESS', 'JWT refreshToken generate successful', {
 				accessToken,
